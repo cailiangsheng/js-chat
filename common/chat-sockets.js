@@ -1,11 +1,17 @@
 
+var _ = require('underscore');
 var events = require('./chat-events');
 var sockets = [];
 
 module.exports = {
     monitor: monitor,
-    sockets: sockets
+    sockets: sockets,
+    socket: socket
 };
+
+function socket() {
+    return _.first(sockets);
+}
 
 function monitor(socket) {
     handleConnecting(socket);
@@ -22,7 +28,7 @@ function handleReadingData(socket) {
     socket.on('readable', function () {
         var chunk = socket.read();
         if (chunk) {
-            var message = chunk.read('utf-8');
+            var message = chunk.toString('utf-8');
             events.emitter.emit(events.MESSAGE_RECEIVED, socket, message);
         }
     });

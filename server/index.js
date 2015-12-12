@@ -1,5 +1,6 @@
 
-var chatManager = require('./chat-manager');
+var chatLogger = require('../common/chat-logger');
+var chatServer = require('./chat-server');
 
-chatManager.createChatServer(7171);
-chatManager.handleMessages();
+chatLogger.enableLogging();
+chatServer(7171);

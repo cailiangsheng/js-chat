@@ -1,13 +1,13 @@
 var net = require('net');
-var events = require('./chat-events');
-var sockets = require('./chat-sockets');
+var events = require('../common/chat-events');
+var sockets = require('../common/chat-sockets');
 var commands = require('./chat-commands');
 var messenger = require('./chat-messenger');
 var server = null;;
 
-module.exports = {
-    createChatServer: createChatServer,
-    handleMessages: handleMessages
+module.exports = function (port) {
+    createChatServer(port);
+    handleMessages();
 };
 
 function createChatServer(port) {

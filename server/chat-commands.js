@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var users = require('./chat-users');
 var messenger = require('./chat-messenger');
 var commands = {
