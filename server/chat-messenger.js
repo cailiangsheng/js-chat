@@ -7,26 +7,27 @@ module.exports= {
     broadcast: broadcast
 };
 
-function broadcast(fromSocket, message, timestamp) {
-    sendTo(null, fromSocket, message, timestamp);
+function broadcast(fromSocket, message) {
+    sendTo(null, fromSocket, message);
 }
 
-function sendTo(userName, fromSocket, message, timestamp) {
+function sendTo(userName, fromSocket, message) {
     var properties = userName ? {name: userName} : null;
     var toUsers = users.getUsers(properties);
     _.forEach(toUsers, function (user) {
-        send(user.socket, fromSocket, message, timestamp);
+        send(user.socket, fromSocket, message);
     });
 }
 
-function send(toSocket, fromSocket, message, timestamp) {
+function send(toSocket, fromSocket, message) {
     if (toSocket) {
-        toSocket.write(encodeMessage(fromSocket, message, timestamp));
+        toSocket.write(encodeMessage(fromSocket, message));
     }
 }
 
-function encodeMessage(fromSocket, message, timestamp) {
+function encodeMessage(fromSocket, message) {
     var fromUser = users.getUser(fromSocket);
+    var timestamp = new Date().getTime();
     var json = JSON.stringify({
         name: fromUser.name,
         color: fromUser.color,

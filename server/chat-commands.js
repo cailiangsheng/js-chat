@@ -2,7 +2,8 @@ var _ = require('underscore');
 var users = require('./chat-users');
 var messenger = require('./chat-messenger');
 var commands = {
-    '/name': renameUser,
+    '/name': changeUserName,
+    '/color': changeUserColor,
     '/ping': feedback,
     '/list': sendUserList,
     '/quit': disconnect
@@ -35,30 +36,33 @@ function getCommand(message) {
     return command;
 }
 
-function execute(fromSocket, message, timestamp) {
+function execute(fromSocket, message) {
     var command = getCommand(message);
-    if (command) {console.log(JSON.stringify(command));
+    if (command) {
         var text = command.text;
-        command.handler(fromSocket, text, timestamp);
+        command.handler(fromSocket, text);
     }
 }
 
-function renameUser(fromSocket, text, timestamp) {
+function changeUserName(fromSocket, text) {
     var newName = text;
-    if (newName) {
-        users.getUser(fromSocket).name = newName;
-    }
+    users.getUser(fromSocket).setName(newName);
 }
 
-function feedback(fromSocket, text, timestamp) {
-    messenger.send(fromSocket, null, "PONG", timestamp);
+function changeUserColor(fromSocket, text) {
+    var newColor = text;
+    users.getUser(fromSocket).setColor(newColor);
 }
 
-function sendUserList(fromSocket, text, timestamp) {
+function feedback(fromSocket, text) {
+    messenger.send(fromSocket, null, "PONG");
+}
+
+function sendUserList(fromSocket, text) {
     var names = _.pluck(users.getUsers(), "name").join('\n');
-    messenger.send(fromSocket, null, names, timestamp);
+    messenger.send(fromSocket, null, names);
 }
 
-function disconnect(fromSocket, text, timestamp) {
+function disconnect(fromSocket, text) {
     fromSocket.end();
 }

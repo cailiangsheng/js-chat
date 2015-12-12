@@ -17,11 +17,13 @@ module.exports = {
 function createUser(socket) {
     var user = new ChatUser(socket);
     users.push(user);
+    events.emitter.emit(events.USER_ADDED, user);
 }
 
 function removeUser(socket) {
     var user = getUser(socket);
     users = _.without(users, user);
+    events.emitter.emit(events.USER_REMOVED, user);
 }
 
 function getUser(socket) {
