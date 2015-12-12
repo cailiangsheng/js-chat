@@ -3,11 +3,11 @@ var events = require('../common/chat-events');
 var sockets = require('../common/chat-sockets');
 var commands = require('./chat-commands');
 var messenger = require('./chat-messenger');
-var server = null;;
+var server = null;
 
 module.exports = function (port) {
-    createChatServer(port);
     handleMessages();
+    createChatServer(port);
 };
 
 function createChatServer(port) {
@@ -24,6 +24,10 @@ function handleMessages() {
 }
 
 function onMessageReceived(fromSocket, message) {
+    message = message.trim();
+
+    if (!message) return;
+
     if (commands.isCommand(message)) {
         commands.execute(fromSocket, message);
     }

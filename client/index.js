@@ -1,6 +1,6 @@
 
-var chatLogger = require('../common/chat-logger');
+//var chatLogger = require('../common/chat-logger');
 var chatClient = require('./chat-client');
 
-chatLogger.enableLogging();
+//chatLogger.enableLogging();
 chatClient('localhost', 7171);

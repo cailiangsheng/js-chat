@@ -15,7 +15,7 @@ module.exports = {
 };
 
 function getRegExp(command) {
-    return new RegExp('^\\s*(\\' + command + ')\\s+(.*)\\s*$', 'i');
+    return new RegExp('^\\s*(\\' + command + ')\\s*(.*)\\s*$', 'i');
 }
 
 function getCommand(message) {

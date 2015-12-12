@@ -20,8 +20,17 @@ function monitor(socket) {
 }
 
 function handleConnecting(socket) {
-    sockets.push(socket);
-    events.emitter.emit(events.SOCKET_CONNECT, socket);
+    if (socket._connecting) {
+        socket.on('connect', onConnect);
+    }
+    else {
+        onConnect();
+    }
+
+    function onConnect() {
+        sockets.push(socket);
+        events.emitter.emit(events.SOCKET_CONNECT, socket);
+    }
 }
 
 function handleReadingData(socket) {

@@ -4,21 +4,30 @@ var sockets = require('../common/chat-sockets');
 var client = null;
 
 module.exports = function (host, port) {
-    createChatClient(host, port);
     handleMessages();
+    createChatClient(host, port);
 }
 
 function createChatClient(host, port) {
     var options = {host: host, port: port};
-    client = net.connect(options, function () {
-        sockets.monitor(client);
-    });
+    client = net.connect(options);
+    sockets.monitor(client);
 }
 
 function handleMessages() {
-    process.stdin.pipe(client);
+    events.emitter.on(events.SOCKET_CONNECT, handleSocketConnnect);
+    events.emitter.on(events.SOCKET_DISCONNECT, handleSocketDisconnect);
+    events.emitter.on(events.MESSAGE_RECEIVED, handleReceivedMessage);
+}
 
-    events.emitter.on(events.MESSAGE_RECEIVED, handleReceivedMessage)
+function handleSocketConnnect() {
+    console.log('Connected to server');
+    process.stdin.pipe(client);
+}
+
+function handleSocketDisconnect(socket) {
+    console.log('\nDisconnected from server');
+    process.exit();
 }
 
 function handleReceivedMessage(socket, message) {
@@ -26,5 +35,5 @@ function handleReceivedMessage(socket, message) {
     var timestamp = parseInt(obj.timestamp);
     var time = '[' + new Date(timestamp).toLocaleTimeString() + '] ';
     var user = obj.name ? obj.name + ': ' : "";
-    console.log(time + user + obj.message + '\n');
+    console.log('\n' + time + user + obj.message + '\n');
 }
