@@ -21,6 +21,7 @@ function handleMessages() {
     events.emitter.on(events.USER_ADDED, onUserAdded);
     events.emitter.on(events.USER_REMOVED, onUserRemoved);
     events.emitter.on(events.USER_NAME_CHANGED, onUserNameChanged);
+    events.emitter.on(events.USER_COLOR_CHANGED, onUserColorChanged);
 }
 
 function onMessageReceived(fromSocket, message) {
@@ -47,5 +48,9 @@ function onUserRemoved(user) {
 
 function onUserNameChanged(user, oldName) {
     messenger.broadcast(null, oldName + ' changed his name to ' + user.name, user.socket);
-    messenger.send(user.socket, null, 'You changed your name to ' + user.name);
+    messenger.send(user.socket, null, 'You changed your name from ' + oldName + ' to ' + user.name);
+}
+
+function onUserColorChanged(user, oldColor) {
+    messenger.send(user.socket, null, 'You changed your color from ' + oldColor + ' to ' + user.color);
 }

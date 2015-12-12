@@ -2,7 +2,7 @@ var _ = require('underscore');
 var events = require('../common/chat-events');
 var ChatUser = require('./chat-user');
 
-var server = new ChatUser(null, 'Server', 'white');
+var server = new ChatUser(null, 'Server', 'yellow');
 var users = [];
 
 events.emitter.on(events.SOCKET_CONNECT, createUser);

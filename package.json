@@ -8,6 +8,7 @@
   ],
   "author": "Larry Cai",
   "dependencies": {
-    "underscore": "*"
+    "underscore": "*",
+    "colors": "*"
   }
 }

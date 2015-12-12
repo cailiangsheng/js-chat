@@ -1,3 +1,4 @@
+var colors = require('colors');
 var net = require('net');
 var events = require('../common/chat-events');
 var sockets = require('../common/chat-sockets');
@@ -35,5 +36,7 @@ function handleReceivedMessage(socket, message) {
     var timestamp = parseInt(obj.timestamp);
     var time = '[' + new Date(timestamp).toLocaleTimeString() + '] ';
     var user = obj.name ? obj.name + ': ' : "";
-    console.log('\n' + time + user + obj.message + '\n');
+    var text = time + user + obj.message;
+    var colorText = obj.color ? (text[obj.color] || text) : text;
+    console.log('\n' + colorText + '\n');
 }
