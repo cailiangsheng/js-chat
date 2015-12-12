@@ -23,5 +23,8 @@ function handleMessages() {
 
 function handleReceivedMessage(socket, message) {
     var obj = JSON.parse(message);
-    console.log('[', obj.timestamp, ']', obj.message);
+    var timestamp = parseInt(obj.timestamp);
+    var time = '[' + new Date(timestamp).toLocaleTimeString() + '] ';
+    var user = obj.name ? obj.name + ': ' : "";
+    console.log(time + user + obj.message + '\n');
 }

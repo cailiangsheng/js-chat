@@ -12,17 +12,17 @@ function enableLogging() {
 }
 
 function onSocketConnect() {
-    console.log("Socket connected");
+    console.log('Socket connected\n');
 }
 
 function onSocketDisconnect() {
-    console.log("Socket disconnected");
+    console.log('Socket disconnected\n');
 }
 
 function onMessageReceived(socket, message) {
-    console.log("Message received:", message);
+    console.log('Message received: ' + message + '\n');
 }
 
 function onServerListening(port) {
-    console.log("Server listening to port:", port);
+    console.log('Server listening to port: ' + port + '\n');
 }
