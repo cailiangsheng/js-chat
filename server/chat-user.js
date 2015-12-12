@@ -1,13 +1,29 @@
 var colors = require('colors');
 var events = require('../common/chat-events');
-var userCount = 0;
 
-module.exports = ChatUser;
+var SERVER_COLOR = 'yellow';
+var USER_DEFAULT_COLOR = 'grey';
+
+var userCount = 0;
+var serverUser = new ChatUser(null, null, SERVER_COLOR);
+
+module.exports = {
+    createUser: createUser,
+    serverUser: serverUser
+};
+
+function createUser(socket, name, color) {
+    return new ChatUser(
+        socket,
+        name || 'User' + (++userCount),
+        color || USER_DEFAULT_COLOR
+    );
+}
 
 function ChatUser(socket, name, color) {
     this.socket = socket;
-    this.name = name || 'User' + (++userCount);
-    this.color = color || 'grey';
+    this.name = name;
+    this.color = color;
 }
 
 ChatUser.prototype.setName = function (name) {
