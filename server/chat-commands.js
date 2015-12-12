@@ -59,7 +59,7 @@ function feedback(fromSocket, text) {
 }
 
 function sendUserList(fromSocket, text) {
-    var names = _.pluck(users.getUsers(), "name").join('\n');
+    var names = _.pluck(users.getUsers(), "name").join(', ');
     messenger.send(fromSocket, null, names);
 }
 

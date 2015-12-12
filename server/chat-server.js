@@ -28,18 +28,20 @@ function onMessageReceived(fromSocket, message) {
         commands.execute(fromSocket, message);
     }
     else {
-        messenger.broadcast(fromSocket, message);
+        messenger.broadcast(fromSocket, message, fromSocket);
     }
 }
 
 function onUserAdded(user) {
-    messenger.broadcast(null, user.name + ' enter the chat');
+    messenger.broadcast(null, user.name + ' enter the chat', user.socket);
+    messenger.send(user.socket, null, 'You enter the chat with name ' + user.name);
 }
 
 function onUserRemoved(user) {
-    messenger.broadcast(null, user.name + ' left the chat');
+    messenger.broadcast(null, user.name + ' left the chat', user.socket);
 }
 
 function onUserNameChanged(user, oldName) {
-    messenger.broadcast(null, oldName + ' changed his name to ' + user.name);
+    messenger.broadcast(null, oldName + ' changed his name to ' + user.name, user.socket);
+    messenger.send(user.socket, null, 'You changed your name to ' + user.name);
 }

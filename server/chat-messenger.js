@@ -7,15 +7,17 @@ module.exports= {
     broadcast: broadcast
 };
 
-function broadcast(fromSocket, message) {
-    sendTo(null, fromSocket, message);
+function broadcast(fromSocket, message, exceptSocket) {
+    sendTo(null, fromSocket, message, exceptSocket);
 }
 
-function sendTo(userName, fromSocket, message) {
+function sendTo(userName, fromSocket, message, exceptSocket) {
     var properties = userName ? {name: userName} : null;
     var toUsers = users.getUsers(properties);
     _.forEach(toUsers, function (user) {
-        send(user.socket, fromSocket, message);
+        if (user.socket != exceptSocket) {
+            send(user.socket, fromSocket, message);
+        }
     });
 }
 
