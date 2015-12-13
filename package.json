@@ -1,6 +1,6 @@
 {
   "name": "js-chat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chatting tool implemented with node.js",
   "main": "index.js",
   "keywords": [
