@@ -1,7 +1,7 @@
 {
   "name": "js-chat",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chatting tool implemented with node.js",
   "main": "index.js",
   "keywords": [
     "chat"
@@ -10,5 +10,9 @@
   "dependencies": {
     "underscore": "*",
     "colors": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cailiangsheng/js-chat.git"
   }
 }
