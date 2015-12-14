@@ -12,8 +12,18 @@ module.exports = function (port) {
 
 function createChatServer(port) {
     server = net.createServer(sockets.monitor);
+    monitor(server);
     server.listen(port);
-    events.emitter.emit(events.SERVER_LISTENING, port);
+}
+
+function monitor(server) {
+    server.on('listening', function () {
+        events.emitter.emit(events.SERVER_LISTENING, server);
+    });
+
+    server.on('error', function (error) {
+        events.emitter.emit(events.SERVER_ERROR, server, error);
+    });
 }
 
 function handleMessages() {
