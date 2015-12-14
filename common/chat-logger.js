@@ -33,10 +33,10 @@ function onServerError(server, error) {
     switch (error.code) {
         case 'EADDRINUSE':
           if (error.syscall == 'listen') {
-              console.log('The port for server to listen is already in use');
+              console.log('The port for server to listen is already in use\n');
               return;
           }
     }
 
-    console.log('Server', error.toString());
+    console.log('Server', error.toString(), '\n');
 }
