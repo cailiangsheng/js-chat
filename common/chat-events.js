@@ -6,6 +6,7 @@ module.exports = {
     SOCKET_DISCONNECT: 'socketDisconnect',
     MESSAGE_RECEIVED: 'messageReceived',
     SERVER_LISTENING: 'serverListening',
+    SERVER_ERROR: 'serverError',
     USER_ADDED: 'userAdded',
     USER_REMOVED: 'userRemoved',
     USER_NAME_CHANGED: 'userNameChanged',
