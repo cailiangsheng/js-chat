@@ -5,11 +5,11 @@ module.exports = {
 };
 
 function enableLogging() {
-    events.emitter.on(events.SOCKET_CONNECT, onSocketConnect);
-    events.emitter.on(events.SOCKET_DISCONNECT, onSocketDisconnect);
-    events.emitter.on(events.MESSAGE_RECEIVED, onMessageReceived);
-    events.emitter.on(events.SERVER_LISTENING, onServerListening);
-    events.emitter.on(events.SERVER_ERROR, onServerError);
+    events.on(events.SOCKET_CONNECT, onSocketConnect);
+    events.on(events.SOCKET_DISCONNECT, onSocketDisconnect);
+    events.on(events.MESSAGE_RECEIVED, onMessageReceived);
+    events.on(events.SERVER_LISTENING, onServerListening);
+    events.on(events.SERVER_ERROR, onServerError);
 }
 
 function onSocketConnect() {

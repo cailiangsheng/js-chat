@@ -29,7 +29,7 @@ function handleConnecting(socket) {
 
     function onConnect() {
         sockets.push(socket);
-        events.emitter.emit(events.SOCKET_CONNECT, socket);
+        events.emit(events.SOCKET_CONNECT, socket);
     }
 }
 
@@ -38,7 +38,7 @@ function handleReadingData(socket) {
         var chunk = socket.read();
         if (chunk) {
             var message = chunk.toString('utf-8');
-            events.emitter.emit(events.MESSAGE_RECEIVED, socket, message);
+            events.emit(events.MESSAGE_RECEIVED, socket, message);
         }
     });
 }
@@ -50,6 +50,6 @@ function handleDisconnecting(socket) {
     function onDisconnect() {
         var index = sockets.indexOf(socket);
         sockets.splice(index, 1);
-        events.emitter.emit(events.SOCKET_DISCONNECT, socket);
+        events.emit(events.SOCKET_DISCONNECT, socket);
     }
 }

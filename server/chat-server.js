@@ -18,20 +18,20 @@ function createChatServer(port) {
 
 function monitor(server) {
     server.on('listening', function () {
-        events.emitter.emit(events.SERVER_LISTENING, server);
+        events.emit(events.SERVER_LISTENING, server);
     });
 
     server.on('error', function (error) {
-        events.emitter.emit(events.SERVER_ERROR, server, error);
+        events.emit(events.SERVER_ERROR, server, error);
     });
 }
 
 function handleMessages() {
-    events.emitter.on(events.MESSAGE_RECEIVED, onMessageReceived);
-    events.emitter.on(events.USER_ADDED, onUserAdded);
-    events.emitter.on(events.USER_REMOVED, onUserRemoved);
-    events.emitter.on(events.USER_NAME_CHANGED, onUserNameChanged);
-    events.emitter.on(events.USER_COLOR_CHANGED, onUserColorChanged);
+    events.on(events.MESSAGE_RECEIVED, onMessageReceived);
+    events.on(events.USER_ADDED, onUserAdded);
+    events.on(events.USER_REMOVED, onUserRemoved);
+    events.on(events.USER_NAME_CHANGED, onUserNameChanged);
+    events.on(events.USER_COLOR_CHANGED, onUserColorChanged);
 }
 
 function onMessageReceived(fromSocket, message) {

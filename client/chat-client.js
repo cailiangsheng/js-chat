@@ -16,9 +16,9 @@ function createChatClient(host, port) {
 }
 
 function handleMessages() {
-    events.emitter.on(events.SOCKET_CONNECT, handleSocketConnnect);
-    events.emitter.on(events.SOCKET_DISCONNECT, handleSocketDisconnect);
-    events.emitter.on(events.MESSAGE_RECEIVED, handleReceivedMessage);
+    events.on(events.SOCKET_CONNECT, handleSocketConnnect);
+    events.on(events.SOCKET_DISCONNECT, handleSocketDisconnect);
+    events.on(events.MESSAGE_RECEIVED, handleReceivedMessage);
 }
 
 function handleSocketConnnect() {

@@ -4,8 +4,8 @@ var user = require('./chat-user');
 
 var users = [];
 
-events.emitter.on(events.SOCKET_CONNECT, createUser);
-events.emitter.on(events.SOCKET_DISCONNECT, removeUser);
+events.on(events.SOCKET_CONNECT, createUser);
+events.on(events.SOCKET_DISCONNECT, removeUser);
 
 module.exports = {
     getUser: getUser,
@@ -15,13 +15,13 @@ module.exports = {
 function createUser(socket) {
     var newUser = user.createUser(socket);
     users.push(newUser);
-    events.emitter.emit(events.USER_ADDED, newUser);
+    events.emit(events.USER_ADDED, newUser);
 }
 
 function removeUser(socket) {
     var user = getUser(socket);
     users = _.without(users, user);
-    events.emitter.emit(events.USER_REMOVED, user);
+    events.emit(events.USER_REMOVED, user);
 }
 
 function getUser(socket) {
