@@ -1,4 +1,5 @@
 //var chatLogger = require('../common/chat-logger');
+var chatUI = require('./chat-ui');
 var chatClient = require('./chat-client');
 
 module.exports = function (port) {
@@ -9,5 +10,6 @@ module.exports = function (port) {
     }
 
     //chatLogger.enableLogging();
+    chatUI.handleEvents();
     chatClient('localhost', port);
 }
