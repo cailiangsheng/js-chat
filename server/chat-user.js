@@ -1,5 +1,6 @@
 var colors = require('colors');
 var events = require('../common/chat-events');
+var messenger = require('../common/chat-messenger');
 
 var SERVER_COLOR = 'yellow';
 var USER_DEFAULT_COLOR = 'grey';
@@ -44,4 +45,35 @@ ChatUser.prototype.setColor = function (color) {
 
 function isValidColor(color) {
     return "test"[color] != undefined;
+}
+
+ChatUser.prototype.encodeMessage = function (message) {
+    var timestamp = new Date().getTime();
+    var json = JSON.stringify({
+        name: this.name,
+        color: this.color,
+        message: message,
+        timestamp: timestamp
+    });
+
+    return json;
+}
+
+ChatUser.prototype.send = function (message, toUser) {
+    var userMessage = this.encodeMessage(message);
+    messenger.send(userMessage, toUser.socket);
+}
+
+ChatUser.prototype.broadcast = function (message, exceptUser) {
+    exceptUser = exceptUser || this;
+
+    var userMessage = this.encodeMessage(message);
+    var exceptSocket = exceptUser ? exceptUser.socket : null;
+    messenger.broadcast(userMessage, exceptSocket);
+}
+
+ChatUser.prototype.quit = function () {
+    if (this.socket) {
+        this.socket.end();
+    }
 }

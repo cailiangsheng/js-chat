@@ -1,12 +1,12 @@
 var _ = require('underscore');
+var serverUser = require('./chat-user').serverUser;
 var users = require('./chat-users');
-var messenger = require('./chat-messenger');
 var commands = {
     '/name': changeUserName,
     '/color': changeUserColor,
     '/ping': feedback,
     '/list': sendUserList,
-    '/quit': disconnect
+    '/quit': userQuit
 };
 
 module.exports = {
@@ -36,33 +36,33 @@ function getCommand(message) {
     return command;
 }
 
-function execute(fromSocket, message) {
+function execute(message, user) {
     var command = getCommand(message);
     if (command) {
         var text = command.text;
-        command.handler(fromSocket, text);
+        command.handler(user, text);
     }
 }
 
-function changeUserName(fromSocket, text) {
+function changeUserName(user, text) {
     var newName = text;
-    users.getUser(fromSocket).setName(newName);
+    user.setName(newName);
 }
 
-function changeUserColor(fromSocket, text) {
+function changeUserColor(user, text) {
     var newColor = text;
-    users.getUser(fromSocket).setColor(newColor);
+    user.setColor(newColor);
 }
 
-function feedback(fromSocket, text) {
-    messenger.send(fromSocket, null, "PONG");
+function feedback(user, text) {
+    serverUser.send("PONG", user);
 }
 
-function sendUserList(fromSocket, text) {
+function sendUserList(user, text) {
     var names = _.pluck(users.getUsers(), "name").join(', ');
-    messenger.send(fromSocket, null, names);
+    serverUser.send(names, user);
 }
 
-function disconnect(fromSocket, text) {
-    fromSocket.end();
+function userQuit(user, text) {
+    user.quit();
 }
