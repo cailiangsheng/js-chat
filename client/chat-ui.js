@@ -14,8 +14,10 @@ function handleSocketConnnect(socket) {
     console.log('\nConnected to server\n');
 
     $('.btnSend').click(function () {
-        var text = $('.txtSend').val();
+        var $txtSend = $('.txtSend');
+        var text = $txtSend.val();
         socket.send(text);
+        $txtSend.val('');
     })
 }
 
@@ -30,6 +32,5 @@ function handleReceivedMessage(socket, message) {
     var user = obj.name ? obj.name + ': ' : "";
     var text = time + user + obj.message;
     var color = obj.color;
-    console.log('Received message:', message);
     $('.txtReceived').append(`<span style="color:${color}">${text}</span><br>`);
 }

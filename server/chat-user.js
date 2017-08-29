@@ -46,7 +46,7 @@ function isValidColor(color) {
     return "test"[color] != undefined;
 }
 
-ChatUser.prototype.encodeMessage = function (message) {
+ChatUser.prototype.encodeMessage = function (message, toUser) {
     var timestamp = new Date().getTime();
     var json = JSON.stringify({
         name: this.name,
@@ -64,7 +64,7 @@ ChatUser.prototype.send = function (message, toUser) {
 }
 
 ChatUser.prototype.broadcast = function (message, exceptUser) {
-    exceptUser = exceptUser || this;
+    //exceptUser = exceptUser || this;
 
     var userMessage = this.encodeMessage(message);
     var exceptSocket = exceptUser ? exceptUser.socket : null;

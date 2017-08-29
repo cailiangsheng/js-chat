@@ -25,7 +25,7 @@ function onMessageReceived(fromSocket, message) {
         commands.execute(message, user);
     }
     else {
-        user.broadcast(message, user);
+        user.broadcast(message/*, user*/);
     }
 }
 
