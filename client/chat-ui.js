@@ -31,5 +31,5 @@ function handleReceivedMessage(socket, message) {
     var text = time + user + obj.message;
     var color = obj.color;
     console.log('Received message:', message);
-    $('.txtReceived').append(text);
+    $('.txtReceived').append(`<span style="color:${color}">${text}</span><br>`);
 }

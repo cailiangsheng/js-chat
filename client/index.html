@@ -5,6 +5,10 @@
     <title>Chat Demo</title>
     <script type="application/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
 
+    <!-- build:[href]:dist ../dist/chat.min.css -->
+    <link rel="stylesheet" href="chat.css">
+    <!-- /build -->
+
     <!-- build:[src]:dist ../dist/chat.min.js -->
     <script type="application/javascript" src="../dist/chat.js"></script>
     <!-- /build -->
@@ -12,6 +16,6 @@
 <body>
     <input type="text" class="txtSend" placeholder="Type some message here...">
     <input type="button" class="btnSend" value="Send">
-    <textarea class="txtReceived"></textarea>
+    <div class="txtReceived"></div>
 </body>
 </html>
