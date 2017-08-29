@@ -1,4 +1,4 @@
-var events = require('../common/chat-events');
+var events = require('./chat-events');
 var serverUser = require('./chat-user').serverUser;
 var users = require('./chat-users');
 var commands = require('./chat-commands');

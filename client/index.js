@@ -1,15 +1,11 @@
-//var chatLogger = require('../common/chat-logger');
+var chatLogger = require('./chat-logger');
 var chatUI = require('./chat-ui');
 var chatClient = require('./chat-client');
 
-module.exports = function (port) {
-    port = parseInt(port);
-    if (!port) {
-        console.log('Please specify port for client to connect');
-        return;
-    }
+init('localhost', 8888);
 
-    //chatLogger.enableLogging();
+function init(host, port) {
+    chatLogger.enableLogging();
     chatUI.handleEvents();
-    chatClient('localhost', port);
+    chatClient(host, port);
 }

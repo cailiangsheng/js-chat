@@ -1,4 +1,4 @@
-var chatLogger = require('../common/chat-logger');
+var chatLogger = require('./chat-logger');
 var chatController = require('./chat-controller');
 var chatServer = require('./chat-server');
 

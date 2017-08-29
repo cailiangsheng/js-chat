@@ -1,14 +1,14 @@
-var net = require('net');
-var events = require('../common/chat-events');
-var sockets = require('../common/chat-sockets');
+var WebSocketServer = require('ws').Server;
+var events = require('./chat-events');
+var sockets = require('./chat-sockets');
 var server = null;
 
 module.exports = createChatServer;
 
 function createChatServer(port) {
-    server = net.createServer(sockets.monitor);
+    server = new WebSocketServer({ port: port });
     monitor(server);
-    server.listen(port);
+    sockets.monitor(server);
 }
 
 function monitor(server) {

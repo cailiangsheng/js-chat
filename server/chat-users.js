@@ -1,5 +1,5 @@
 var _ = require('underscore');
-var events = require('../common/chat-events');
+var events = require('./chat-events');
 var user = require('./chat-user');
 
 var users = [];

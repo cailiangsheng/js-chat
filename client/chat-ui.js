@@ -1,5 +1,4 @@
-var colors = require('colors');
-var events = require('../common/chat-events');
+var events = require('./chat-events');
 
 module.exports = {
     handleEvents: handleEvents
@@ -13,12 +12,15 @@ function handleEvents() {
 
 function handleSocketConnnect(socket) {
     console.log('\nConnected to server\n');
-    process.stdin.pipe(socket);
+
+    $('.btnSend').click(function () {
+        var text = $('.txtSend').val();
+        socket.send(text);
+    })
 }
 
 function handleSocketDisconnect(socket) {
     console.log('\nDisconnected from server\n');
-    process.exit();
 }
 
 function handleReceivedMessage(socket, message) {
@@ -27,6 +29,7 @@ function handleReceivedMessage(socket, message) {
     var time = '[' + new Date(timestamp).toLocaleTimeString() + '] ';
     var user = obj.name ? obj.name + ': ' : "";
     var text = time + user + obj.message;
-    var colorText = obj.color ? (text[obj.color] || text) : text;
-    console.log('\n' + colorText + '\n');
+    var color = obj.color;
+    console.log('Received message:', message);
+    $('.txtReceived').append(text);
 }

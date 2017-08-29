@@ -1,6 +1,5 @@
-var colors = require('colors');
-var events = require('../common/chat-events');
-var messenger = require('../common/chat-messenger');
+var events = require('./chat-events');
+var messenger = require('./chat-messenger');
 
 var SERVER_COLOR = 'yellow';
 var USER_DEFAULT_COLOR = 'grey';

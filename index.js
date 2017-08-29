@@ -1,11 +1,11 @@
 var _ = require('underscore');
-var client = require('./client');
+//var client = require('./client');
 var server = require('./server');
 var options = {
-    '-c': {
-        handler: client,
-        usage: 'Use -c to specify port for client to connect'
-    },
+    //'-c': {
+    //    handler: client,
+    //    usage: 'Use -c to specify port for client to connect'
+    //},
     '-p': {
         handler: server,
         usage: 'Use -p to specify port for server to listen'

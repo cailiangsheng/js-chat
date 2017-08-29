@@ -15,37 +15,30 @@ function socket() {
 
 function monitor(socket) {
     handleConnecting(socket);
-    handleReadingData(socket);
-    handleDisconnecting(socket);
 }
 
 function handleConnecting(socket) {
-    if (socket._connecting) {
-        socket.on('connect', onConnect);
-    }
-    else {
-        onConnect();
-    }
+    $(socket).on('open', onConnect);
 
     function onConnect() {
         sockets.push(socket);
         events.emit(events.SOCKET_CONNECT, socket);
+
+        handleMessage(socket);
+        handleDisconnecting(socket);
     }
 }
 
-function handleReadingData(socket) {
-    socket.on('readable', function () {
-        var chunk = socket.read();
-        if (chunk) {
-            var message = chunk.toString('utf-8');
-            events.emit(events.MESSAGE_RECEIVED, socket, message);
-        }
+function handleMessage(socket) {
+    $(socket).on('message', function (event) {
+        events.emit(events.MESSAGE_RECEIVED, socket, event.originalEvent.data);
     });
 }
 
 function handleDisconnecting(socket) {
-    socket.on('end', onDisconnect);
-    socket.on('error', onDisconnect);
+    $(socket)
+        .on('close', onDisconnect)
+        .on('error', onDisconnect);
 
     function onDisconnect() {
         var index = sockets.indexOf(socket);

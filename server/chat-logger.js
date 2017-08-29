@@ -1,4 +1,4 @@
-var events = require('../common/chat-events');
+var events = require('./chat-events');
 
 module.exports = {
     enableLogging: enableLogging
@@ -25,7 +25,7 @@ function onMessageReceived(socket, message) {
 }
 
 function onServerListening(server) {
-    var port = server.address().port;
+    var port = server.options.port;
     console.log('Server listening to port: ' + port + '\n');
 }
 

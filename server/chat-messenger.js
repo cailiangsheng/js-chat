@@ -8,7 +8,7 @@ module.exports = {
 
 function send(message, toSocket) {
     if (toSocket) {
-        toSocket.write(message);
+        toSocket.send(message);
     }
 }
 
