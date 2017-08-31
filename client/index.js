@@ -1,6 +1,6 @@
-var chatLogger = require('./chat-logger');
-var chatUI = require('./chat-ui');
-var chatClient = require('./chat-client');
+var chatLogger = require('./controller/chat-logger');
+var chatUI = require('./controller/chat-ui');
+var chatClient = require('./model/chat-client');
 
 init('localhost', 8888);
 

@@ -46,7 +46,7 @@ module.exports = function (grunt) {
       less: {
         dist: {
           files: {
-            'dist/chat.css': 'client/chat.less'
+            'dist/chat.css': 'client/view/chat.less'
           }
         }
       },

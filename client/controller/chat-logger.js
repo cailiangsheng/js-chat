@@ -1,4 +1,4 @@
-var events = require('./chat-events');
+var events = require('../model/chat-events');
 
 module.exports = {
     enableLogging: enableLogging
