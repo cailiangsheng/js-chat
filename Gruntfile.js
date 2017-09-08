@@ -1,5 +1,5 @@
 module.exports = function (grunt) {
-  grunt.registerTask('build', ['clean', 'less', 'cssmin', 'browserify', 'uglify', 'processhtml', 'htmlmin'])
+  grunt.registerTask('build', ['clean', 'less', 'cssmin', 'browserify', 'uglify', 'processhtml', 'htmlmin', 'copy'])
   grunt.registerTask('dev', ['build', 'watch'])
   grunt.registerTask('test', ['mochaTest:test'])
   grunt.registerTask('default', ['build', 'test'])
@@ -52,7 +52,21 @@ module.exports = function (grunt) {
       },
 
       clean: {
-        all: ['dist/*']
+        all: ['dist/*', 'public/*']
+      },
+
+      copy: {
+        index: {
+          src: 'dist/chat.min.html',
+          dest: 'public/index.html'
+        },
+        other: {
+          expand: true,
+          cwd: 'dist/',
+          src: 'chat.min.*',
+          dest: 'public/',
+          flatten: true
+        }
       },
 
       eslint: {
@@ -132,6 +146,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin')
   grunt.loadNpmTasks('grunt-processhtml')
   grunt.loadNpmTasks('grunt-contrib-htmlmin')
+  grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-eslint')
   grunt.loadNpmTasks('grunt-mocha-test')
