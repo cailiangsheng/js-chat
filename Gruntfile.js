@@ -56,6 +56,10 @@ module.exports = function (grunt) {
       },
 
       copy: {
+        jquery: {
+          src: 'node_modules/jquery/dist/jquery.min.js',
+          dest: 'dist/jquery.min.js'
+        },
         index: {
           src: 'dist/chat.min.html',
           dest: 'public/index.html'
@@ -63,7 +67,7 @@ module.exports = function (grunt) {
         other: {
           expand: true,
           cwd: 'dist/',
-          src: 'chat.min.*',
+          src: '*.min.*',
           dest: 'public/',
           flatten: true
         }
