@@ -8,6 +8,8 @@
   ],
   "author": "Larry Cai",
   "scripts": {
+    "prepublish": "npm run build",
+    "build": "grunt",
     "server": "node . -p 8888",
     "client": "http-server -p 80"
   },
