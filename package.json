@@ -13,9 +13,6 @@
     "server": "node . -p 8888",
     "client": "http-server -p 80"
   },
-  "dependencies": {
-    "http-server": "^0.10.0"
-  },
   "devDependencies": {
     "babel-preset-es2015": "^6.0.15",
     "babelify": "7.2.0",
@@ -34,7 +31,8 @@
     "grunt-eslint": "^17.1.0",
     "grunt-mocha-test": "^0.12.7",
     "grunt-processhtml": "~0.3.3",
-    "jquery": "*",
+    "http-server": "^0.10.0",
+    "jquery": "^3.2.1",
     "mocha": "*",
     "underscore": "*",
     "ws": "*"
