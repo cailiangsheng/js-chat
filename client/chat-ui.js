@@ -1,13 +1,23 @@
 var events = require('./chat-events');
 
+import React from 'react';
+import { render } from 'react-dom';
+import ChatView from './chat-view';
+
 module.exports = {
     handleEvents: handleEvents
 };
 
 function handleEvents() {
+    $(document).ready(initView);
+
     events.on(events.SOCKET_CONNECT, handleSocketConnnect);
     events.on(events.SOCKET_DISCONNECT, handleSocketDisconnect);
     events.on(events.MESSAGE_RECEIVED, handleReceivedMessage);
+}
+
+function initView() {
+  render(<ChatView/>, document.querySelector('#view'));
 }
 
 function handleSocketConnnect(socket) {
