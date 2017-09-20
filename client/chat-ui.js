@@ -6,6 +6,7 @@ import { render } from 'react-dom';
 import ChatView from './chat-view';
 
 let connectedSocket;
+let receivedMessages = [];
 let chatView;
 
 export default {
@@ -22,7 +23,7 @@ function handleEvents() {
 
 function initView() {
   chatView = render(
-        <ChatView onSend={handleSend} />,
+        <ChatView onSend={handleSend} messages={receivedMessages} />,
         document.querySelector('#view')
     );
 }
@@ -46,11 +47,11 @@ function handleSocketDisconnect(socket) {
 }
 
 function handleReceivedMessage(socket, message) {
-    var obj = JSON.parse(message);
-    var timestamp = parseInt(obj.timestamp);
-    var time = '[' + new Date(timestamp).toLocaleTimeString() + '] ';
-    var user = obj.name ? obj.name + ': ' : "";
-    var text = time + user + obj.message;
-    var color = obj.color;
-    $('.txtReceived').append(`<span style="color:${color}">${text}</span><br>`);
+    console.log('\nReceived message from server:', message, '\n');
+
+    receivedMessages.push(message);
+
+    if (chatView) {
+        chatView.update();
+    }
 }
