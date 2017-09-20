@@ -11,9 +11,9 @@ module.exports = function (grunt) {
     grunt.task.run(['cssmin', 'browserify:dist', 'uglify', 'processhtml:dist', 'htmlmin']);
   });
 
-  grunt.registerTask('dev', ['build', 'watch'])
-  grunt.registerTask('test', ['mochaTest:test'])
-  grunt.registerTask('default', ['build', 'test'])
+  grunt.registerTask('dev', ['build', 'watch']);
+  grunt.registerTask('test', ['mochaTest:test']);
+  grunt.registerTask('default', ['build', 'test']);
 
   grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'),
@@ -149,19 +149,18 @@ module.exports = function (grunt) {
           src: ['./test/*.js']
         }
       }
-    }
-  )
+    });
 
-  grunt.loadNpmTasks('grunt-browserify')
-  grunt.loadNpmTasks('grunt-contrib-less')
-  grunt.loadNpmTasks('grunt-contrib-clean')
-  grunt.loadNpmTasks('grunt-contrib-uglify')
-  grunt.loadNpmTasks('grunt-contrib-cssmin')
-  grunt.loadNpmTasks('grunt-processhtml')
-  grunt.loadNpmTasks('grunt-contrib-htmlmin')
-  grunt.loadNpmTasks('grunt-contrib-copy')
-  grunt.loadNpmTasks('grunt-contrib-watch')
-  grunt.loadNpmTasks('grunt-eslint')
-  grunt.loadNpmTasks('grunt-mocha-test')
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-processhtml');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-eslint');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
 }
