@@ -1,5 +1,16 @@
 module.exports = function (grunt) {
-  grunt.registerTask('build', ['clean', 'less', 'cssmin', 'browserify', 'uglify', 'processhtml', 'htmlmin', 'copy'])
+  grunt.registerTask('build', ['clean', 'less', 'process:dist', 'process:dev', 'copy']);
+
+  grunt.registerTask('process:dev', function () {
+    process.env.NODE_ENV = 'development';
+    grunt.task.run(['browserify:dev', 'processhtml:dev']);
+  });
+
+  grunt.registerTask('process:dist', function () {
+    process.env.NODE_ENV = 'production';
+    grunt.task.run(['cssmin', 'browserify:dist', 'uglify', 'processhtml:dist', 'htmlmin']);
+  });
+
   grunt.registerTask('dev', ['build', 'watch'])
   grunt.registerTask('test', ['mochaTest:test'])
   grunt.registerTask('default', ['build', 'test'])
@@ -9,40 +20,44 @@ module.exports = function (grunt) {
 
       browserify: {
         options: {
-          browserifyOptions: {
-            debug: true
-          },
           transform: [
-            'stringify'
+            'babelify'
           ],
-          external: []
+          external: [],
+          watch: true
         },
-        dist: {
+        dev: {
           files: {
             'dist/chat.js': ['client/index.js']
           },
           options: {
             browserifyOptions: {
               debug: true
-            },
-            transform: [
-              'babelify'
-            ],
-            watch: true
+            }
+          }
+        },
+        dist: {
+          files: {
+            'dist/chat.min.js': ['client/index.js']
+          },
+          options: {
+            browserifyOptions: {
+              debug: false
+            }
           }
         }
       },
 
       uglify: {
-        minify: {
+        dist: {
           files: {
-            'dist/chat.min.js': ['dist/chat.js']
+            'dist/chat.min.js': ['dist/chat.min.js']
           }
         }
       },
 
       less: {
-        dist: {
+        dev: {
           files: {
             'dist/chat.css': 'client/chat.less'
           }
@@ -54,7 +69,7 @@ module.exports = function (grunt) {
       },
 
       copy: {
-        index: {
+        html: {
           src: 'dist/chat.min.html',
           dest: 'public/index.html'
         },
