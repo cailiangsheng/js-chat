@@ -1,7 +1,7 @@
-var events = require('./chat-events');
+import events from './chat-events';
 
-module.exports = {
-    enableLogging: enableLogging
+export default {
+	enableLogging
 };
 
 function enableLogging() {

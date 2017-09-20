@@ -1,12 +1,13 @@
+import $ from 'jquery';
+import _ from 'underscore';
+import events from './chat-events';
 
-var _ = require('underscore');
-var events = require('./chat-events');
-var sockets = [];
+const sockets = [];
 
-module.exports = {
-    monitor: monitor,
-    sockets: sockets,
-    socket: socket
+export default {
+    monitor,
+    sockets,
+    socket
 };
 
 function socket() {
@@ -18,19 +19,17 @@ function monitor(socket) {
 }
 
 function handleConnecting(socket) {
-    $(socket).on('open', onConnect);
-
-    function onConnect() {
+    $(socket).on('open', () => {
         sockets.push(socket);
         events.emit(events.SOCKET_CONNECT, socket);
 
         handleMessage(socket);
         handleDisconnecting(socket);
-    }
+    });
 }
 
 function handleMessage(socket) {
-    $(socket).on('message', function (event) {
+    $(socket).on('message', event => {
         events.emit(events.MESSAGE_RECEIVED, socket, event.originalEvent.data);
     });
 }
@@ -41,7 +40,7 @@ function handleDisconnecting(socket) {
         .on('error', onDisconnect);
 
     function onDisconnect() {
-        var index = sockets.indexOf(socket);
+        const index = sockets.indexOf(socket);
         sockets.splice(index, 1);
         events.emit(events.SOCKET_DISCONNECT, socket);
     }

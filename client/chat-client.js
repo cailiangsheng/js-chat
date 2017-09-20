@@ -1,9 +1,8 @@
-var sockets = require('./chat-sockets');
-var client = null;
+import sockets from './chat-sockets';
 
-module.exports = createChatClient;
+let client = null;
 
-function createChatClient(host, port) {
+export default function createChatClient(host, port) {
     client = new WebSocket(`ws://${host}:${port}`);
     sockets.monitor(client);
 }

@@ -15,9 +15,7 @@ module.exports = function (grunt) {
           transform: [
             'stringify'
           ],
-          external: [
-            'jquery'
-          ]
+          external: []
         },
         dist: {
           files: {
@@ -56,10 +54,6 @@ module.exports = function (grunt) {
       },
 
       copy: {
-        jquery: {
-          src: 'node_modules/jquery/dist/jquery.min.js',
-          dest: 'dist/jquery.min.js'
-        },
         index: {
           src: 'dist/chat.min.html',
           dest: 'public/index.html'

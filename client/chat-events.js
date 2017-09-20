@@ -1,7 +1,8 @@
-var events = require('events');
-var emitter = new events.EventEmitter();
+import { EventEmitter } from 'events';
 
-module.exports = {
+const emitter = new EventEmitter();
+
+export default {
     on: emitter.on,
     emit: emitter.emit,
     SOCKET_CONNECT: 'socketConnect',

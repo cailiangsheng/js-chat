@@ -1,11 +1,12 @@
-var events = require('./chat-events');
+import $ from 'jquery';
+import events from './chat-events';
 
 import React from 'react';
 import { render } from 'react-dom';
 import ChatView from './chat-view';
 
-module.exports = {
-    handleEvents: handleEvents
+export default {
+    handleEvents
 };
 
 function handleEvents() {
@@ -17,13 +18,13 @@ function handleEvents() {
 }
 
 function initView() {
-  render(<ChatView/>, document.querySelector('#view'));
+  render(<ChatView />, document.querySelector('#view'));
 }
 
 function handleSocketConnnect(socket) {
     console.log('\nConnected to server\n');
 
-    $('.btnSend').click(function () {
+    $('.btnSend').click(() => {
         var $txtSend = $('.txtSend');
         var text = $txtSend.val();
         socket.send(text);

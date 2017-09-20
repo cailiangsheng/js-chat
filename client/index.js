@@ -1,6 +1,6 @@
-var chatLogger = require('./chat-logger');
-var chatUI = require('./chat-ui');
-var chatClient = require('./chat-client');
+import chatLogger from './chat-logger';
+import chatUI from './chat-ui';
+import chatClient from './chat-client';
 
 init('ecs.zeta.name', 8888);
 
