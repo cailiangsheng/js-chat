@@ -5,6 +5,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import ChatView from './chat-view';
 
+let connectedSocket;
+let chatView;
+
 export default {
     handleEvents
 };
@@ -18,22 +21,28 @@ function handleEvents() {
 }
 
 function initView() {
-  render(<ChatView />, document.querySelector('#view'));
+  chatView = render(
+        <ChatView onSend={handleSend} />,
+        document.querySelector('#view')
+    );
+}
+
+function handleSend() {
+    const text = chatView.text();
+    if (connectedSocket && text) {
+        connectedSocket.send(text);
+        chatView.text('');
+    }
 }
 
 function handleSocketConnnect(socket) {
     console.log('\nConnected to server\n');
-
-    $('.btnSend').click(() => {
-        var $txtSend = $('.txtSend');
-        var text = $txtSend.val();
-        socket.send(text);
-        $txtSend.val('');
-    })
+    connectedSocket = socket;
 }
 
 function handleSocketDisconnect(socket) {
     console.log('\nDisconnected from server\n');
+    connectedSocket = null;
 }
 
 function handleReceivedMessage(socket, message) {
