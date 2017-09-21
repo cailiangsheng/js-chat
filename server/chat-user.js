@@ -74,7 +74,7 @@ ChatUser.prototype.broadcast = function (message, exceptUser) {
 }
 
 ChatUser.prototype.quit = function () {
-    serverUser.send('Goodbye ' + this.name, this);
+    serverUser.send('BYE', this);
 
     if (this.socket) {
         this.socket.close();
