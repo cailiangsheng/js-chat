@@ -28,7 +28,8 @@ export default class ChatView extends Component {
 		        <input type="text" className="send-text"
 		        	placeholder="Type some message here..."
 		        	value={ this.state.text }
-		        	onChange={event => { this.setState({text: event.target.value}) }} />
+		        	onChange={event => { this.setState({text: event.target.value}) }}
+		        	onKeyDown={event => { if (event.key === 'Enter') onSend() }} />
 		    </div>
 		    <ul className="received-messages">{items}</ul>
 	    </div>
