@@ -5,8 +5,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import ChatView from './chat-view';
 
+const receivedMessages = [];
+
 let connectedSocket;
-let receivedMessages = [];
 let chatView;
 
 export default {
