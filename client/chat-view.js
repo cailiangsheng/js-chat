@@ -54,13 +54,12 @@ function adjustView() {
 	textView.focus();
 }
 
-function toListItem(message, key) {
-  const obj = JSON.parse(message);
-  const timestamp = parseInt(obj.timestamp);
+function toListItem(msg, key) {
+  const timestamp = parseInt(msg.timestamp);
   const time = '[' + new Date(timestamp).toLocaleTimeString() + '] ';
-  const user = obj.name ? obj.name + ': ' : "";
-  const text = time + user + obj.message;
-  const color = obj.color;
+  const user = msg.name ? msg.name + ': ' : "";
+  const text = time + user + msg.message;
+  const color = msg.color;
   return (<li key={key} style={{color:color}}>{text}</li>);
 }
 

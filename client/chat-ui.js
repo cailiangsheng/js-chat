@@ -50,7 +50,9 @@ function handleSocketDisconnect(socket) {
 function handleReceivedMessage(socket, message) {
     console.log('\nReceived message from server:', message, '\n');
 
-    receivedMessages.push(message);
+    const msg = JSON.parse(message);
+
+    receivedMessages.push(msg);
 
     if (chatView) {
         chatView.update();
