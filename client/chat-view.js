@@ -18,6 +18,11 @@ export default class ChatView extends Component {
 		this.setState({ text: this.state.text });
 	}
 
+	componentDidUpdate() {
+		const messagesView = document.querySelector('.received-messages');
+		messagesView.scrollTop = messagesView.scrollHeight;
+	}
+
 	render() {
 		const { onSend, messages } = this.props;
 		const items = messages.map(toListItem);
