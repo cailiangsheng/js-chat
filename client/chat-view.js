@@ -19,7 +19,9 @@ export default class ChatView extends Component {
 	}
 
 	componentDidUpdate() {
+		const textView = document.querySelector('.send-text');
 		const messagesView = document.querySelector('.received-messages');
+		textView.focus();
 		messagesView.scrollTop = messagesView.scrollHeight;
 	}
 
