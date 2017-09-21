@@ -7,6 +7,8 @@ var USER_DEFAULT_COLOR = 'grey';
 var userCount = 0;
 var serverUser = new ChatUser(null, null, SERVER_COLOR);
 
+var colors = ['red', 'green', 'white', 'blue'];
+
 module.exports = {
     createUser: createUser,
     serverUser: serverUser
@@ -43,7 +45,7 @@ ChatUser.prototype.setColor = function (color) {
 }
 
 function isValidColor(color) {
-    return "test"[color] != undefined;
+    return color && colors.indexOf(color.toLowerCase()) >= 0;
 }
 
 ChatUser.prototype.encodeMessage = function (message, toUser) {
@@ -72,7 +74,9 @@ ChatUser.prototype.broadcast = function (message, exceptUser) {
 }
 
 ChatUser.prototype.quit = function () {
+    serverUser.send('Goodbye ' + this.name, this);
+
     if (this.socket) {
-        this.socket.end();
+        this.socket.close();
     }
 }
