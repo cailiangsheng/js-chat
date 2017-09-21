@@ -18,11 +18,12 @@ export default class ChatView extends Component {
 		this.setState({ text: this.state.text });
 	}
 
+	componentDidMount() {
+		adjustView();
+	}
+
 	componentDidUpdate() {
-		const textView = document.querySelector('.send-text');
-		const messagesView = document.querySelector('.received-messages');
-		textView.focus();
-		messagesView.scrollTop = messagesView.scrollHeight;
+		adjustView();
 	}
 
 	render() {
@@ -30,18 +31,27 @@ export default class ChatView extends Component {
 		const items = messages.map(toListItem);
 		return (
 			<div>
-		    <input type="button" className="send-button" value="Send" onClick={onSend} />
-		    <div className="send-text-wrapper">
-		        <input type="text" className="send-text"
-		        	placeholder="Type some message here..."
-		        	value={ this.state.text }
-		        	onChange={event => { this.setState({text: event.target.value}) }}
-		        	onKeyDown={event => { if (event.key === 'Enter') onSend() }} />
-		    </div>
+				<div className="send-wrapper">
+			    <input type="button" className="send-button" value="Send" onClick={onSend} />
+			    <div className="send-text-wrapper">
+			        <input type="text" className="send-text"
+			        	placeholder="Type some message here..."
+			        	value={ this.state.text }
+			        	onChange={event => { this.setState({text: event.target.value}) }}
+			        	onKeyDown={event => { if (event.key === 'Enter') onSend() }} />
+			    </div>
+			  </div>
 		    <ul className="received-messages">{items}</ul>
 	    </div>
 		);
 	}
+}
+
+function adjustView() {
+	const textView = document.querySelector('.send-text');
+	const messagesView = document.querySelector('.received-messages');
+	messagesView.scrollTop = messagesView.scrollHeight;
+	textView.focus();
 }
 
 function toListItem(message, key) {
